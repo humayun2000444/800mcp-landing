@@ -48,6 +48,11 @@ function draw() {
   $("#credit").replaceChildren(before, site, after || "");
   drawStatus();
   drawFilm();
+  // The four steps are stills of the film — of the film in this language.
+  for (const img of document.querySelectorAll(".steps-list img")) {
+    const src = img.getAttribute("src").replace(/step-(\d)(-ar)?\.jpg$/, (_, n) => `step-${n}${t.lang === "ar" ? "-ar" : ""}.jpg`);
+    if (src !== img.getAttribute("src")) img.setAttribute("src", src);
+  }
 }
 
 function drawStatus() {
