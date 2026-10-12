@@ -1,0 +1,396 @@
+/* Shared look for the call page, the camera tour and the agent console.
+
+   ONE THEME, ON PURPOSE. The brand is a sign read at night: a near-black navy
+   ground, one amber, white type. There is no light variant, so every colour
+   below is painted explicitly and nothing is borrowed from the device's own
+   light or dark setting.
+
+   The two typefaces are served from this site (shared/fonts, SIL Open Font
+   License) and swap in when they arrive: the page is opened by a stranger on
+   mobile data, and the first thing they see must be the button, not a blank.
+
+   IN ARABIC each has its partner, for the Arabic letters only (unicode-range):
+   Cairo beside Titillium Web — Cairo's own Latin letters were drawn from
+   Titillium's — and IBM Plex Sans Arabic beside IBM Plex Sans, drawn as its
+   pair. An English page never downloads either (the one Arabic word on its
+   language switch is drawn in the phone's own letters — call.css). */
+
+@font-face {
+  font-family: "Titillium Web";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/titillium-web-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Titillium Web";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/titillium-web-latin-600-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Titillium Web";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/titillium-web-latin-700-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/ibm-plex-sans-latin-400-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/ibm-plex-sans-latin-500-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/ibm-plex-sans-latin-600-normal.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Cairo";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/cairo-arabic-400-normal.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+@font-face {
+  font-family: "Cairo";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/cairo-arabic-600-normal.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+@font-face {
+  font-family: "Cairo";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/cairo-arabic-700-normal.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans Arabic";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2") format("woff2");
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* ground, from the page up to the thing floating over it */
+  --bg: #0b0e15;
+  --bg-glow: #171d2b;
+  --surface: #121722;
+  --surface-2: #1a2130;
+  --control: #262d3b;
+  --control-press: #323a4b;
+  --line: #273041;
+  --line-soft: #1b2331;
+
+  /* type */
+  --ink: #ffffff;
+  --text: #e8ecf3;
+  --muted: #9aa4b6;
+  --faint: #667086;
+
+  /* the one amber */
+  --brand: #f5b041;
+  --brand-hi: #ffc866;
+  --brand-lo: #d8952b;
+  --brand-soft: rgba(245, 176, 65, 0.14);
+  --brand-line: rgba(245, 176, 65, 0.45);
+  --on-brand: #0b0e15;
+
+  /* meaning, kept apart from the brand colour */
+  --go: #37c98b;
+  --go-press: #2aad76;
+  --go-soft: rgba(55, 201, 139, 0.14);
+  --stop: #f0525d;
+  --stop-press: #d9414c;
+  --stop-soft: rgba(240, 82, 93, 0.14);
+  --note-bg: rgba(245, 176, 65, 0.13);
+  --note-ink: #ffd58a;
+
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+  --radius: 14px;
+  --font: "IBM Plex Sans", "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --display: "Titillium Web", "Cairo", "IBM Plex Sans", "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.45 var(--font);
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--ink);
+  font-family: var(--display);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* Arabic letters are joined: spacing them apart (as the brand's small capitals
+   are spaced) breaks the joins. Every page in Arabic sets them close — all but
+   what is marked as English, such as the site's own name. */
+html:lang(ar) body *:not(:lang(en)) {
+  letter-spacing: 0 !important;
+}
+
+/* The small amber line of capitals the brand puts above things. */
+.eyebrow {
+  color: var(--brand);
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-weight: 600;
+  transition: background 0.12s ease, border-color 0.12s ease, transform 0.12s ease;
+}
+
+.btn:hover {
+  border-color: #354056;
+  background: var(--control);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  border-color: var(--brand);
+  background: var(--brand);
+  color: var(--on-brand);
+}
+
+.btn-primary:hover {
+  border-color: var(--brand-hi);
+  background: var(--brand-hi);
+}
+
+.btn-go {
+  border-color: var(--go);
+  background: var(--go);
+  color: #06140e;
+}
+
+.btn-go:hover {
+  border-color: var(--go);
+  background: #4ad79a;
+}
+
+.btn-stop {
+  border-color: var(--stop);
+  background: var(--stop);
+  color: #fff;
+}
+
+.btn-stop:hover {
+  border-color: var(--stop);
+  background: #f4707a;
+}
+
+.btn-quiet {
+  border-color: transparent;
+  background: transparent;
+  color: var(--brand);
+}
+
+.btn-quiet:hover {
+  border-color: transparent;
+  background: var(--brand-soft);
+}
+
+.field {
+  display: block;
+}
+
+.field > span {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--faint);
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px var(--brand-soft);
+}
+
+.field .problem,
+.problem {
+  margin-top: 6px;
+  color: #ff8a92;
+  font-size: 14px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.chip:hover {
+  border-color: var(--brand-line);
+}
+
+.chip[aria-pressed="true"],
+.chip[aria-checked="true"] {
+  border-color: var(--brand);
+  background: var(--brand);
+  color: var(--on-brand);
+  font-weight: 600;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

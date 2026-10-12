@@ -1,0 +1,1070 @@
+/* The landing page — 800mcp.com.
+
+   MOBILE FIRST: what is written here first is the phone in a hand on the
+   pavement; wider screens add to it (bottom of the file). Every tap target is
+   at least 44px, nothing is wider than the screen, and the way into a call is
+   always in reach — in the bar, in the hero, and once more before the end.
+
+   The brand's own night (shared/base.css): navy ground, one amber, white type,
+   Titillium for what the sign says and IBM Plex for the rest (Cairo and Plex
+   Arabic, in Arabic). The one bold thing is the headline, lit like the sign;
+   the film moves beside it; everything under it is quiet. Every side is
+   "start" and "end", never left and right, so the page turns round by itself
+   in Arabic. Motion is gentle, and none at all for anyone who asks for less. */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+}
+
+body {
+  /* Dusk over the city, as in the film: violet high up, the sign's amber below it. */
+  background:
+    radial-gradient(900px 560px at 85% -10%, rgba(124, 92, 168, 0.30), rgba(124, 92, 168, 0) 70%) no-repeat,
+    radial-gradient(700px 480px at 0% -4%, rgba(245, 176, 65, 0.10), rgba(245, 176, 65, 0) 70%) no-repeat,
+    var(--bg);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+svg {
+  flex: none;
+}
+
+.skip {
+  position: absolute;
+  inset-inline-start: 16px;
+  top: -60px;
+  z-index: 30;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--brand);
+  color: var(--on-brand);
+  font-weight: 600;
+}
+
+.skip:focus {
+  top: 12px;
+}
+
+/* ── buttons ─────────────────────────────────────────────────────────── */
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--brand);
+  color: var(--on-brand);
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.cta:hover {
+  background: var(--brand-hi);
+}
+
+.cta:active {
+  transform: translateY(1px);
+}
+
+.cta svg,
+.ghost svg,
+.outline svg,
+.film-sound svg {
+  width: 18px;
+  height: 18px;
+}
+
+.cta svg,
+.outline svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cta.big {
+  min-height: 56px;
+  padding: 0 28px;
+  font-size: 17px;
+  box-shadow: 0 12px 34px rgba(245, 176, 65, 0.24);
+}
+
+.ghost,
+.outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 56px;
+  padding: 0 24px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.ghost:hover,
+.outline:hover {
+  border-color: var(--brand-line);
+  color: var(--ink);
+}
+
+.ghost svg {
+  fill: currentColor;
+}
+
+.outline {
+  border-color: var(--brand-line);
+  color: var(--brand);
+}
+
+.outline:hover {
+  background: var(--brand-soft);
+  color: var(--brand-hi);
+}
+
+/* ── the bar ─────────────────────────────────────────────────────────── */
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid var(--line-soft);
+  background: rgba(11, 14, 21, 0.84);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  backdrop-filter: saturate(140%) blur(12px);
+  transition: box-shadow 0.2s ease;
+}
+
+.bar.scrolled {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.bar-in {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 8px 16px;
+  padding-top: max(8px, env(safe-area-inset-top));
+}
+
+.logo {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+}
+
+.logo-word {
+  display: none;
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.logo-word b {
+  color: var(--brand);
+}
+
+.nav {
+  display: none;
+}
+
+.lang {
+  flex: none;
+  min-height: 44px;
+  margin-inline-start: auto;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: 500 14px/1 var(--font);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.lang:hover {
+  border-color: var(--brand-line);
+  color: var(--ink);
+}
+
+/* The button in the bar: its short name on the narrowest phones, its whole
+   name from 372 px (an iPhone mini) — a size smaller until there is room. */
+.cta-long {
+  display: none;
+}
+
+.bar .cta {
+  padding: 0 14px;
+  font-size: 14px;
+}
+
+/* ── the hero ────────────────────────────────────────────────────────── */
+
+.hero {
+  display: grid;
+  gap: 36px;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 28px 16px 40px;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 18px;
+  padding: 6px 13px 6px 11px;
+  border: 1px solid rgba(55, 201, 139, 0.35);
+  border-radius: 999px;
+  background: var(--go-soft);
+  color: #b9f1d6;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.status[hidden] {
+  display: none;
+}
+
+.status .dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--go);
+}
+
+.hero h1 {
+  margin-top: 12px;
+  font-size: clamp(40px, 11.6vw, 82px);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.hero h1 span {
+  display: block;
+}
+
+/* Lit, as the sign is at night. */
+.hero h1 .lit {
+  color: var(--brand);
+  text-shadow: 0 0 34px rgba(245, 176, 65, 0.32);
+}
+
+.hero .lede {
+  max-width: 34em;
+  margin-top: 18px;
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.perks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.perks li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--line-soft);
+  border-radius: 999px;
+  background: rgba(18, 23, 34, 0.6);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.perks svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.film {
+  margin: 0;
+}
+
+.film-frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #000;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55), 0 0 0 6px rgba(255, 255, 255, 0.02);
+}
+
+.film video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Over the silent loop: the whole film, with its sound, one tap away. */
+.film-sound {
+  position: absolute;
+  inset-inline-start: 12px;
+  bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px 0 13px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(11, 14, 21, 0.72);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: var(--ink);
+  font: 600 14px/1 var(--font);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.film-sound:hover {
+  border-color: var(--brand-line);
+  background: rgba(11, 14, 21, 0.86);
+}
+
+.film-sound[hidden] {
+  display: none;
+}
+
+.film-sound svg {
+  fill: var(--brand);
+}
+
+.film-sound .len {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ── toll-free, worldwide ─────────────────────────────────────────────── */
+
+.world {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 16px 56px;
+}
+
+.world-panel {
+  position: relative;
+  display: grid;
+  gap: 20px;
+  overflow: hidden;
+  padding: 26px 20px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(124, 92, 168, 0.24), rgba(18, 23, 34, 0.92) 58%);
+}
+
+/* A faint globe behind it all, at the end of the line. */
+.world-backdrop {
+  position: absolute;
+  inset-inline-end: -70px;
+  top: -60px;
+  width: 280px;
+  height: 280px;
+  fill: none;
+  stroke: rgba(245, 176, 65, 0.13);
+  stroke-width: 0.5;
+  pointer-events: none;
+}
+
+.world-badge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--brand-line);
+  border-radius: 16px;
+  background: var(--brand-soft);
+}
+
+.world-badge svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.world-text {
+  position: relative;
+}
+
+.world h2 {
+  margin-top: 10px;
+  font-size: clamp(26px, 7vw, 38px);
+  font-weight: 700;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.world-text > p:not(.eyebrow) {
+  max-width: 36em;
+  margin-top: 12px;
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.world-points {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.world-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.world-points svg {
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── the sections ────────────────────────────────────────────────────── */
+
+.steps,
+.offer,
+.about,
+.biz,
+.faq,
+.final,
+.contact {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 60px 16px;
+}
+
+.steps,
+.offer,
+.about,
+.faq,
+.contact {
+  border-top: 1px solid var(--line-soft);
+}
+
+.section-head {
+  max-width: 760px;
+}
+
+.section-head h2,
+.contact h2,
+.biz h2,
+.final h2 {
+  margin-top: 12px;
+  font-size: clamp(27px, 7.4vw, 42px);
+  font-weight: 700;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+/* How it works: on a phone, a row to swipe through — the next one peeking in. */
+.steps-list {
+  display: grid;
+  grid-auto-columns: 80%;
+  grid-auto-flow: column;
+  gap: 14px;
+  margin: 30px -16px 0;
+  padding: 4px 16px 14px;
+  overflow-x: auto;
+  list-style: none;
+  scroll-padding-inline: 16px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.steps-list::-webkit-scrollbar {
+  display: none;
+}
+
+.steps-list li {
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: 16px;
+  background: rgba(18, 23, 34, 0.72);
+  scroll-snap-align: start;
+}
+
+.steps-list img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--surface-2);
+}
+
+.step-text {
+  padding: 16px 18px 20px;
+}
+
+.steps-list .n {
+  display: inline-grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--brand-line);
+  border-radius: 50%;
+  background: var(--brand-soft);
+  color: var(--brand);
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.steps-list h3,
+.offer-grid h3 {
+  margin: 12px 0 6px;
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.steps-list p,
+.offer-grid p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* What we offer: on a phone, the icon beside its words, to keep the list short. */
+.offer-grid {
+  display: grid;
+  gap: 12px;
+  margin: 30px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.offer-grid li {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 4px 14px;
+  padding: 18px;
+  border: 1px solid var(--line-soft);
+  border-radius: 16px;
+  background: rgba(18, 23, 34, 0.72);
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.offer-grid svg {
+  width: 42px;
+  height: 42px;
+  padding: 9px;
+  border-radius: 12px;
+  background: var(--brand-soft);
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.offer-grid h3 {
+  margin-top: 2px;
+}
+
+.about-body {
+  display: grid;
+  gap: 16px;
+  max-width: 62ch;
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.about-body .about-lead {
+  color: var(--ink);
+  font-size: 19px;
+  line-height: 1.55;
+}
+
+/* For the people who own the towers: the one panel lit with the brand's amber. */
+.biz-panel {
+  display: grid;
+  gap: 26px;
+  padding: 28px 20px;
+  border: 1px solid var(--brand-line);
+  border-radius: 20px;
+  background:
+    radial-gradient(520px 260px at 100% 0%, rgba(245, 176, 65, 0.14), rgba(245, 176, 65, 0) 70%),
+    linear-gradient(180deg, rgba(26, 33, 48, 0.9), rgba(18, 23, 34, 0.9));
+}
+
+.biz-text > p:not(.eyebrow) {
+  margin-top: 14px;
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.biz-points {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+}
+
+.biz-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.biz-points svg {
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.biz .outline {
+  width: 100%;
+}
+
+/* Questions: each one a line to open — the answer under it. */
+.faq-list {
+  max-width: 820px;
+  margin-top: 26px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.faq details {
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 60px;
+  padding: 14px 0;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary i {
+  position: relative;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  transition: transform 0.25s ease, border-color 0.2s ease;
+}
+
+.faq summary i::before,
+.faq summary i::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 2px;
+  margin: -1px 0 0 -6px;
+  border-radius: 1px;
+  background: var(--brand);
+}
+
+.faq summary i::after {
+  transform: rotate(90deg);
+}
+
+.faq details[open] summary i {
+  border-color: var(--brand-line);
+  transform: rotate(45deg);
+}
+
+.faq details p {
+  max-width: 64ch;
+  padding: 0 0 20px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* The call, once more, before the end. */
+.final {
+  display: grid;
+  justify-items: center;
+  padding-top: 64px;
+  padding-bottom: 64px;
+  text-align: center;
+}
+
+.final h2 {
+  margin-top: 0;
+}
+
+.final > p {
+  max-width: 30em;
+  margin-top: 12px;
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.final .cta {
+  width: 100%;
+  margin-top: 26px;
+}
+
+.final .perks {
+  justify-content: center;
+}
+
+.contact {
+  display: grid;
+  gap: 30px;
+}
+
+.contact-text > p:not(.eyebrow) {
+  max-width: 34em;
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.contact-list {
+  display: grid;
+  align-self: start;
+  margin: 0;
+  border-top: 1px solid var(--line-soft);
+}
+
+.contact-list > div {
+  display: grid;
+  gap: 6px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.contact-list dt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.contact-list svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.contact-list dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+/* A number and an address read left to right — and are big enough to tap. */
+.contact-list dd a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  transition: color 0.15s ease;
+}
+
+.contact-list dd a:hover {
+  color: var(--brand);
+}
+
+/* ── the foot ────────────────────────────────────────────────────────── */
+
+.foot {
+  border-top: 1px solid var(--line-soft);
+}
+
+.foot-in {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 24px;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 24px 16px max(24px, env(safe-area-inset-bottom));
+  color: var(--faint);
+  font-size: 13px;
+}
+
+.foot-in b {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.foot-in a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--muted);
+}
+
+.foot-in a:hover {
+  color: var(--ink);
+}
+
+/* ── motion: gentle, and only for those who have not asked for less ───── */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* The phone in the big buttons rings now and then, as a call does. */
+  .cta.big svg {
+    animation: ring 4s ease-in-out infinite;
+    transform-origin: 50% 60%;
+  }
+
+  .status .dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--go);
+    animation: ping 1.8s ease-out infinite;
+  }
+
+  .offer-grid li:hover,
+  .steps-list li:hover {
+    border-color: var(--brand-line);
+    transform: translateY(-3px);
+  }
+
+  .steps-list li {
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+@keyframes ring {
+  0%, 68%, 100% { transform: rotate(0); }
+  72% { transform: rotate(-14deg); }
+  76% { transform: rotate(12deg); }
+  80% { transform: rotate(-10deg); }
+  84% { transform: rotate(8deg); }
+  88% { transform: rotate(0); }
+}
+
+@keyframes ping {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+/* ── wider than a narrow phone ───────────────────────────────────────── */
+
+@media (min-width: 372px) {
+  .cta-long { display: inline; }
+  .cta-short { display: none; }
+}
+
+@media (min-width: 430px) {
+  .bar .cta { padding: 0 16px; font-size: 15px; }
+}
+
+@media (min-width: 560px) {
+  .logo-word { display: inline; }
+}
+
+@media (min-width: 560px) {
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .final .cta { width: auto; }
+  .biz .outline { width: auto; }
+  .contact-list > div { grid-template-columns: minmax(130px, 38%) 1fr; align-items: center; gap: 12px; }
+}
+
+/* ── tablets ─────────────────────────────────────────────────────────── */
+
+@media (min-width: 720px) {
+  .bar-in { gap: 14px; padding-inline: 20px; }
+  .hero { padding: 48px 20px 52px; }
+  .world { padding: 0 20px 72px; }
+  .world-panel { padding: 36px; }
+  .hero .lede { font-size: 18px; }
+  .steps, .offer, .about, .biz, .faq, .final, .contact { padding: 80px 20px; }
+  .steps-list {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 36px 0 0;
+    padding: 0;
+    overflow: visible;
+  }
+  .offer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .offer-grid li { display: block; padding: 24px; }
+  .offer-grid h3 { margin-top: 16px; }
+  .biz-panel { padding: 40px; }
+  .about-body { font-size: 17px; }
+  .about-body .about-lead { font-size: 21px; }
+}
+
+/* ── desktops ────────────────────────────────────────────────────────── */
+
+@media (min-width: 1024px) {
+  .nav {
+    display: flex;
+    gap: 24px;
+    margin-inline-start: auto;
+  }
+
+  .nav a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+
+  .nav a:hover,
+  .nav a[aria-current="true"] {
+    color: var(--ink);
+  }
+
+  /* Where the reader is now: a short amber line under that section's name. */
+  .nav a[aria-current="true"]::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 6px;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--brand);
+  }
+
+  .lang { margin-inline-start: 0; }
+  .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr); align-items: center; gap: 56px; padding: 84px 20px 72px; }
+  .world { padding-bottom: 96px; }
+  .world-panel { grid-template-columns: auto minmax(0, 1.25fr) minmax(0, 0.85fr); align-items: center; gap: 36px; padding: 40px 44px; }
+  .world-backdrop { width: 380px; height: 380px; top: -110px; inset-inline-end: -90px; }
+  .steps-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .offer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .about { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 64px; align-items: start; }
+  .about .about-body { margin-top: 34px; }
+  .biz-panel { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 56px; align-items: center; padding: 52px 56px; }
+  .contact { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; }
+  .film-sound { inset-inline-start: 16px; bottom: 16px; }
+}
+
+/* ── Arabic ──────────────────────────────────────────────────────────── */
+
+html:lang(ar) .hero h1 {
+  /* Arabic letters are wider: a little smaller, so each line of the sign stays one line. */
+  font-size: clamp(38px, 10.4vw, 66px);
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+html:lang(ar) .hero .lede,
+html:lang(ar) .about-body,
+html:lang(ar) .faq details p {
+  line-height: 1.85;
+}
+
+/* The light in the panel comes from the start of the line: the right, in Arabic. */
+html[dir="rtl"] .world-panel {
+  background: linear-gradient(225deg, rgba(124, 92, 168, 0.24), rgba(18, 23, 34, 0.92) 58%);
+}
+
+html[dir="rtl"] .biz-panel {
+  background:
+    radial-gradient(520px 260px at 0% 0%, rgba(245, 176, 65, 0.14), rgba(245, 176, 65, 0) 70%),
+    linear-gradient(180deg, rgba(26, 33, 48, 0.9), rgba(18, 23, 34, 0.9));
+}
