@@ -14,8 +14,12 @@ import { WORDS } from "./words.js";
 
 const $ = (selector) => document.querySelector(selector);
 // (Relative: the same files work from the service and from any static host.)
-const LOOP = "static/landing/media/800mcp-loop.mp4";
-const FILM = "static/landing/media/800mcp-film.mp4";
+// The film is made in each language: the Arabic page shows the Arabic one.
+const MEDIA = "static/landing/media/";
+const filmOf = (lang) => {
+  const ar = lang === "ar" ? "-ar" : "";
+  return { loop: `${MEDIA}800mcp-loop${ar}.mp4`, film: `${MEDIA}800mcp-film${ar}.mp4`, poster: `${MEDIA}800mcp-film-poster${ar}.jpg` };
+};
 const setting = (name) => (document.querySelector(`meta[name="800mcp:${name}"]`) || {}).content;
 // Where "Live preview & booking" goes: the call page, wherever the call is.
 const CALL = setting("call") || "/call";
@@ -43,6 +47,7 @@ function draw() {
   site.textContent = "cameramcp.com";
   $("#credit").replaceChildren(before, site, after || "");
   drawStatus();
+  drawFilm();
 }
 
 function drawStatus() {
@@ -72,6 +77,22 @@ const sound = $("#film-sound");
 const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   || !!(navigator.connection && navigator.connection.saveData);
 let mode = "film";          // "loop" while the silent loop plays in the hero
+let filmLang = "";          // the language of the film now in the player
+
+// The film in this page's language — swapped where it stands (loop or whole film).
+function drawFilm() {
+  if (filmLang === t.lang) return;
+  const first = !filmLang;
+  filmLang = t.lang;
+  const media = filmOf(t.lang);
+  film.poster = media.poster;
+  // First time: the loop's source is chosen below; the plain film (for anyone
+  // who asked for less motion) is the page's own <source> — in English.
+  if (first) { if (mode !== "loop" && t.lang !== "en") film.src = media.film; return; }
+  const wasPlaying = !film.paused;
+  film.src = mode === "loop" ? media.loop : media.film;
+  if (wasPlaying || mode === "loop") film.play().catch(() => {});
+}
 
 function wholeFilm(play) {
   if (mode === "loop") {
@@ -79,7 +100,7 @@ function wholeFilm(play) {
     film.loop = false;
     film.muted = false;
     film.controls = true;
-    film.src = FILM;
+    film.src = filmOf(t.lang).film;
   }
   sound.hidden = true;
   if (play) {
@@ -94,7 +115,7 @@ if (!calm) {
   film.muted = true;
   film.loop = true;
   film.setAttribute("muted", "");
-  film.src = LOOP;
+  film.src = filmOf(t.lang).loop;
   sound.hidden = false;
   const playing = film.play();
   // A browser that will not play it by itself: the film, its poster and its controls.
