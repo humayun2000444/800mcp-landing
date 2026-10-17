@@ -13,10 +13,10 @@
   <meta name="800mcp:call" content="#contact">
   <meta name="800mcp:service" content="none">
   <title>800mcp.com — Call the tower. See it live.</title>
-  <meta name="description" content="See the apartments inside our Dubai towers on live cameras and book a viewing in a minute — toll-free from anywhere in the world, no app, in English and Arabic.">
+  <meta name="description" content="Stop wondering what it's like up there. See inside Dubai apartments on live cameras and book a viewing in a minute — toll-free from anywhere in the world, no app, in English and Arabic.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="800mcp.com — Call the tower. See it live.">
-  <meta property="og:description" content="Live camera tours of Dubai apartments — toll-free from anywhere in the world — and a viewing booked in a minute.">
+  <meta property="og:description" content="Every lit window in Dubai is someone's home. See inside, live — toll-free from anywhere in the world — and book a viewing in a minute.">
   <meta property="og:image" content="https://humayun2000444.github.io/800mcp-landing/static/landing/media/800mcp-film-poster.jpg">
   <link rel="icon" type="image/svg+xml" href="static/shared/brand/800mcp-mark.svg">
   <link rel="icon" type="image/png" href="static/shared/brand/800mcp-favicon.png">
@@ -53,121 +53,152 @@
 
   <main id="main">
 
-    <!-- The sign itself — lit — and the film playing beside it. -->
-    <section class="hero">
-      <div class="hero-text">
-        <p class="status" id="status" hidden><span class="dot" aria-hidden="true"></span><span id="status-text"></span></p>
-        <p class="eyebrow" data-t="hero.eyebrow">Dubai · Live apartment tours</p>
-        <h1><span data-t="hero.1">Call the tower.</span> <span class="lit" data-t="hero.2">See it live.</span></h1>
-        <p class="lede" data-t="hero.lede">Standing outside one of our towers — or anywhere in the world? See the apartments inside on live cameras, room by room, and book a viewing in a minute. Toll-free, right in your browser.</p>
-        <div class="hero-actions">
-          <a class="cta big js-call" href="/call" data-testid="hero-cta">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span data-t="hero.start">Start a live preview</span>
-          </a>
-          <a class="ghost" href="#film" id="watch">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            <span data-t="hero.watch">Watch the film</span>
-          </a>
+    <!-- Dusk over the city, as the film opens: the windows lighting up behind,
+         the headline's last line switching on like the sign — and the film. -->
+    <section class="hero" aria-labelledby="hero-title">
+      <canvas class="skyline" id="skyline" aria-hidden="true"></canvas>
+      <div class="hero-in">
+        <div class="hero-text">
+          <p class="status" id="status" hidden><span class="dot" aria-hidden="true"></span><span id="status-text"></span></p>
+          <p class="kicker"><span class="pane" aria-hidden="true"></span><span data-t="hero.kicker">Every lit window in Dubai is someone's home.</span></p>
+          <h1 id="hero-title"><span data-t="hero.1">Call the tower.</span> <span class="lit" data-t="hero.2">See it live.</span></h1>
+          <p class="lede" data-t="hero.lede">Wondering what it's like up there? Walk through the apartment live, room by room, while you're still on the pavement — or from the other side of the world. Toll-free, in Arabic or English, with nothing to install.</p>
+          <div class="hero-actions">
+            <a class="cta big js-call" href="/call" data-testid="hero-cta">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span data-t="hero.start">Start a live preview</span>
+            </a>
+            <a class="ghost" href="#film" id="watch">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              <span data-t="hero.watch">Watch the film</span>
+            </a>
+          </div>
+          <ul class="perks">
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="perk.free">Toll-free, worldwide</span></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="perk.noapp">No app</span></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="perk.live">Live, not photos</span></li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="perk.langs">English &amp; العربية</span></li>
+          </ul>
         </div>
-        <ul class="perks">
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="perk.free">Toll-free, worldwide</span></li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="perk.noapp">No app</span></li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="perk.live">Live, not photos</span></li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="perk.langs">English &amp; العربية</span></li>
-        </ul>
-      </div>
 
-      <figure class="film" id="film">
-        <div class="film-frame">
-          <video id="film-video" controls playsinline preload="metadata"
-                 poster="static/landing/media/800mcp-film-poster.jpg"
-                 aria-label="The 800mcp film: from the street, to the sign, to the apartment — live." data-t-label="film.label">
-            <source src="static/landing/media/800mcp-film.mp4" type="video/mp4">
-          </video>
-          <button class="film-sound" id="film-sound" type="button" hidden>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-            <span data-t="film.sound">Watch with sound</span>
-            <span class="len" lang="en">0:42</span>
-          </button>
-        </div>
-      </figure>
-    </section>
-
-    <!-- Toll-free, from any country: the call is the internet, not a phone line. -->
-    <section class="world" id="world" aria-labelledby="world-title">
-      <div class="world-panel">
-        <svg class="world-backdrop" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        <span class="world-badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
-        <div class="world-text">
-          <p class="eyebrow" data-t="world.eyebrow">Calling from abroad?</p>
-          <h2 id="world-title" data-t="world.title">Toll-free from anywhere in the world.</h2>
-          <p data-t="world.text">Like an 800 number, it costs the caller nothing — but it works from any country, because the call runs over the internet in the browser. No international rates, no roaming: just the data you already use.</p>
-        </div>
-        <ul class="world-points">
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="world.1">Buyers abroad see inside, live</span></li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="world.2">No international or roaming charges</span></li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="world.3">Just a browser and the internet</span></li>
-        </ul>
+        <figure class="film" id="film">
+          <div class="film-frame">
+            <video id="film-video" controls playsinline preload="metadata"
+                   poster="static/landing/media/800mcp-film-poster.jpg"
+                   aria-label="The 800mcp film: from the street, to the sign, to the apartment — live." data-t-label="film.label">
+              <source src="static/landing/media/800mcp-film.mp4" type="video/mp4">
+            </video>
+            <button class="film-sound" id="film-sound" type="button" hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              <span data-t="film.sound">Watch with sound</span>
+              <span class="len" lang="en">0:42</span>
+            </button>
+          </div>
+        </figure>
       </div>
     </section>
 
-    <section class="steps" id="how" aria-labelledby="steps-title">
+    <!-- How it works, told as the film tells it: four moments of one evening,
+         by the clock (the film's phone says 6:44). -->
+    <section class="story" id="how" aria-labelledby="moments-title">
       <div class="section-head">
-        <p class="eyebrow" data-t="steps.eyebrow">How it works</p>
-        <h2 id="steps-title" data-t="steps.title">From the street to a viewing, in four steps.</h2>
+        <p class="eyebrow" data-t="moments.eyebrow">How it works</p>
+        <h2 id="moments-title" data-t="moments.title">From the pavement to a viewing, before the sky goes dark.</h2>
       </div>
-      <ol class="steps-list">
+      <ol class="moments">
         <li>
-          <img src="static/landing/media/step-1.jpg" width="848" height="478" loading="lazy" decoding="async" alt="The 800mcp.com sign, lit, on top of a tower at dusk." data-t-alt="steps.1.alt">
-          <div class="step-text"><span class="n">1</span><h3 data-t="steps.1.title">Find the sign</h3><p data-t="steps.1.text">At any of our towers: 800mcp.com — type it into your phone's browser.</p></div>
+          <time class="at" datetime="18:44" data-t="moments.1.time">6:44 pm</time>
+          <figure class="still"><img src="static/landing/media/step-1.jpg" width="848" height="478" loading="lazy" decoding="async" alt="The 800mcp.com sign, lit, on top of a tower at dusk." data-t-alt="moments.1.alt"></figure>
+          <h3 data-t="moments.1.title">You look up.</h3>
+          <p data-t="moments.1.text">A tower you've walked past a hundred times. On top, a sign: 800mcp.com. You type it into your phone's browser.</p>
         </li>
         <li>
-          <img src="static/landing/media/step-2.jpg" width="848" height="478" loading="lazy" decoding="async" alt="The call on a phone: the assistant asks which tower you are looking at." data-t-alt="steps.2.alt">
-          <div class="step-text"><span class="n">2</span><h3 data-t="steps.2.title">Accept the call</h3><p data-t="steps.2.text">Our assistant answers straight away. Nothing rings, nobody waits.</p></div>
+          <time class="at" datetime="18:44" data-t="moments.2.time">6:44 pm</time>
+          <figure class="still"><img src="static/landing/media/step-2.jpg" width="848" height="478" loading="lazy" decoding="async" alt="The call on a phone: the assistant asks which tower you are looking at." data-t-alt="moments.2.alt"></figure>
+          <h3 data-t="moments.2.title">We answer.</h3>
+          <p data-t="moments.2.text">Our assistant picks up at once, in Arabic or English. No ringing, no waiting, no office hours.</p>
         </li>
         <li>
-          <img src="static/landing/media/step-3.jpg" width="848" height="478" loading="lazy" decoding="async" alt="A live camera inside the apartment: the view from the forty-second floor." data-t-alt="steps.3.alt">
-          <div class="step-text"><span class="n">3</span><h3 data-t="steps.3.title">See inside, live</h3><p data-t="steps.3.text">Room by room on live cameras, described as you go.</p></div>
+          <time class="at" datetime="18:45" data-t="moments.3.time">6:45 pm</time>
+          <figure class="still">
+            <img src="static/landing/media/step-3.jpg" width="848" height="478" loading="lazy" decoding="async" alt="A live camera inside the apartment: the view from the forty-second floor." data-t-alt="moments.3.alt">
+            <span class="live-badge"><i aria-hidden="true"></i><span data-t="moments.3.live">Live</span></span>
+          </figure>
+          <h3 data-t="moments.3.title">You're inside.</h3>
+          <p data-t="moments.3.text">The living room, live, as it is this minute. Forty-two floors up — and that's the view, right now.</p>
         </li>
         <li>
-          <img src="static/landing/media/step-4.jpg" width="848" height="478" loading="lazy" decoding="async" alt="The assistant asks whether to book your viewing." data-t-alt="steps.4.alt">
-          <div class="step-text"><span class="n">4</span><h3 data-t="steps.4.title">Book a viewing</h3><p data-t="steps.4.text">Leave your name and a time; a consultant calls you back.</p></div>
+          <time class="at" datetime="18:47" data-t="moments.4.time">6:47 pm</time>
+          <figure class="still"><img src="static/landing/media/step-4.jpg" width="848" height="478" loading="lazy" decoding="async" alt="The assistant asks whether to book your viewing." data-t-alt="moments.4.alt"></figure>
+          <h3 data-t="moments.4.title">Saturday, 11 am.</h3>
+          <p data-t="moments.4.text">You leave your name and a time that suits you, and a consultant calls to confirm. You haven't even crossed the road.</p>
         </li>
       </ol>
     </section>
 
-    <section class="offer" id="offer" aria-labelledby="offer-title">
-      <div class="section-head">
-        <p class="eyebrow" data-t="offer.eyebrow">What we offer</p>
-        <h2 id="offer-title" data-t="offer.title">Everything between the pavement and the viewing.</h2>
+    <!-- Toll-free from anywhere: a departures board — Dubai is where the world
+         changes planes — on which every call costs the same: nothing. -->
+    <section class="world" id="world" aria-labelledby="world-title">
+      <div class="world-text">
+        <p class="eyebrow" data-t="world.eyebrow">Calling from abroad?</p>
+        <h2 id="world-title" data-t="world.title">Thousands of kilometres away. Standing in the living room.</h2>
+        <p data-t="world.text">Choosing a home in Dubai from another country used to mean a flight — or trusting photographs. Now you walk through it live, from wherever you are.</p>
+        <p class="world-free" data-t="world.free">Toll-free from anywhere in the world.</p>
+        <p class="world-how" data-t="world.how">The call runs over the internet in your browser: no international rates, no roaming — only the data you already use.</p>
       </div>
-      <ul class="offer-grid">
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
-          <div><h3 data-t="offer.live.title">Live camera tours</h3><p data-t="offer.live.text">Every room as it is this minute — not a photograph from last season.</p></div>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg>
-          <div><h3 data-t="offer.ai.title">An assistant that answers at once</h3><p data-t="offer.ai.text">Day or night, in English or Arabic. It knows the towers, shows the rooms and takes the details.</p></div>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M9 16l2 2 4-4"/></svg>
-          <div><h3 data-t="offer.book.title">A viewing in a minute</h3><p data-t="offer.book.text">A name, a mobile number and a time that suits — and a consultant calls back.</p></div>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-          <div><h3 data-t="offer.noapp.title">Toll-free, from anywhere</h3><p data-t="offer.noapp.text">The call runs in your browser over the internet — no app, no number to dial, no international charges.</p></div>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></svg>
-          <div><h3 data-t="offer.sign.title">The sign is the way in</h3><p data-t="offer.sign.text">Type the address written on any of our towers into your phone's browser — nothing to scan, nothing to download.</p></div>
-        </li>
-        <li>
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <div><h3 data-t="offer.person.title">A person, whenever you want one</h3><p data-t="offer.person.text">One word and a consultant takes over — and every enquiry reaches our team the moment it is made.</p></div>
-        </li>
-      </ul>
+      <div class="board" id="board">
+        <div class="board-head">
+          <p class="board-title" data-t="board.title">Calling Dubai from</p>
+          <p class="board-clock" id="board-clock" hidden></p>
+        </div>
+        <p class="board-cols" aria-hidden="true"><span></span><span data-t="board.from">From</span><span data-t="board.distance">Distance</span><span data-t="board.call">Your call</span></p>
+        <ul class="board-rows">
+          <li style="--row: 0"><span class="code" lang="en" aria-hidden="true"><b style="--i: 0">L</b><b style="--i: 1">H</b><b style="--i: 2">R</b></span><span class="place"><span class="city" data-t="board.lhr">London</span><span class="km" data-km="5470">5,470 km</span></span><span class="fare" data-t="board.free">Free</span></li>
+          <li style="--row: 1"><span class="code" lang="en" aria-hidden="true"><b style="--i: 0">B</b><b style="--i: 1">O</b><b style="--i: 2">M</b></span><span class="place"><span class="city" data-t="board.bom">Mumbai</span><span class="km" data-km="1940">1,940 km</span></span><span class="fare" data-t="board.free">Free</span></li>
+          <li style="--row: 2"><span class="code" lang="en" aria-hidden="true"><b style="--i: 0">R</b><b style="--i: 1">U</b><b style="--i: 2">H</b></span><span class="place"><span class="city" data-t="board.ruh">Riyadh</span><span class="km" data-km="870">870 km</span></span><span class="fare" data-t="board.free">Free</span></li>
+          <li style="--row: 3"><span class="code" lang="en" aria-hidden="true"><b style="--i: 0">C</b><b style="--i: 1">A</b><b style="--i: 2">I</b></span><span class="place"><span class="city" data-t="board.cai">Cairo</span><span class="km" data-km="2420">2,420 km</span></span><span class="fare" data-t="board.free">Free</span></li>
+          <li style="--row: 4"><span class="code" lang="en" aria-hidden="true"><b style="--i: 0">J</b><b style="--i: 1">F</b><b style="--i: 2">K</b></span><span class="place"><span class="city" data-t="board.jfk">New York</span><span class="km" data-km="11010">11,010 km</span></span><span class="fare" data-t="board.free">Free</span></li>
+          <li style="--row: 5" class="here"><span class="code" lang="en" aria-hidden="true"><b style="--i: 0">D</b><b style="--i: 1">X</b><b style="--i: 2">B</b></span><span class="place"><span class="city" data-t="board.dxb">Downstairs</span><span class="km" data-km="0">0 km</span></span><span class="fare" data-t="board.free">Free</span></li>
+        </ul>
+        <p class="board-note" data-t="board.note">No international or roaming charges.</p>
+      </div>
+    </section>
+
+    <!-- What we offer: what made looking for a home tiring, and what is there instead. -->
+    <section class="ways" id="offer" aria-labelledby="ways-title">
+      <div class="section-head">
+        <p class="eyebrow" data-t="ways.eyebrow">What we offer</p>
+        <h2 id="ways-title" data-t="ways.title">Looking for a home, without the tiring parts.</h2>
+      </div>
+      <div class="ways-table">
+        <p class="ways-cols" aria-hidden="true"><span data-t="ways.old">The old way</span><span data-t="ways.new">With 800mcp</span></p>
+        <ul class="ways-list">
+          <li>
+            <p class="was"><span class="sr" data-t="ways.instead">Instead of:</span> <s data-t="ways.1.was">Photos taken months ago</s></p>
+            <div class="now"><h3 data-t="ways.1.title">Live camera tours</h3><p data-t="ways.1.text">Every room as it is this minute — the light, the view, the street below.</p></div>
+          </li>
+          <li>
+            <p class="was"><span class="sr" data-t="ways.instead">Instead of:</span> <s data-t="ways.2.was">Waiting for the office to open</s></p>
+            <div class="now"><h3 data-t="ways.2.title">Answered at once</h3><p data-t="ways.2.text">Day or night, our assistant picks up in seconds, in Arabic or English.</p></div>
+          </li>
+          <li>
+            <p class="was"><span class="sr" data-t="ways.instead">Instead of:</span> <s data-t="ways.3.was">An app, a sign-up, a form</s></p>
+            <div class="now"><h3 data-t="ways.3.title">Just the address on the sign</h3><p data-t="ways.3.text">Type 800mcp.com into your phone's browser. Nothing to scan, nothing to download.</p></div>
+          </li>
+          <li>
+            <p class="was"><span class="sr" data-t="ways.instead">Instead of:</span> <s data-t="ways.4.was">International call charges</s></p>
+            <div class="now"><h3 data-t="ways.4.title">Toll-free, from anywhere</h3><p data-t="ways.4.text">The call runs over the internet in your browser, so it costs nothing from any country.</p></div>
+          </li>
+          <li>
+            <p class="was"><span class="sr" data-t="ways.instead">Instead of:</span> <s data-t="ways.5.was">Feeling sold to</s></p>
+            <div class="now"><h3 data-t="ways.5.title">No pressure</h3><p data-t="ways.5.text">Look as long as you like and hang up whenever you want. Ask for a person any time.</p></div>
+          </li>
+          <li>
+            <p class="was"><span class="sr" data-t="ways.instead">Instead of:</span> <s data-t="ways.6.was">Calling around to arrange a viewing</s></p>
+            <div class="now"><h3 data-t="ways.6.title">A viewing in a minute</h3><p data-t="ways.6.text">Leave a name and a time that suits you — a consultant calls back to confirm.</p></div>
+          </li>
+        </ul>
+      </div>
     </section>
 
     <section class="about" id="about" aria-labelledby="about-title">
@@ -176,10 +207,21 @@
         <h2 id="about-title" data-t="about.title">The inside of the tower, for anyone standing outside it.</h2>
       </div>
       <div class="about-body">
-        <p class="about-lead" data-t="about.p1">Most people choose an apartment from photographs taken months ago. 800mcp puts the apartment itself on their screen — as it is right now — while they are standing at the building.</p>
-        <p data-t="about.p2">A passer-by sees our sign, opens 800mcp.com and is answered straight away. Our assistant finds the tower, walks them through the apartment room by room on live cameras, and books a viewing with a property consultant who knows the building.</p>
-        <p data-t="about.p3">No app to download, no number to dial — and no call charges, wherever they are calling from: it all happens in the browser of the phone in their hand.</p>
+        <p class="about-lead" data-t="about.p1">Choosing a home is one of the biggest decisions anyone makes. Yet most people make it from photographs taken months ago — and only while an office is open.</p>
+        <p data-t="about.p2">We thought the building itself should answer. So we put a sign on the tower, cameras in the show apartments, and a voice that answers anyone who asks — on the pavement outside, or on the other side of the world.</p>
+        <p data-t="about.p3">No app to download, no number to dial, no call charges: just the apartment, as it is right now, on the phone in your hand.</p>
       </div>
+    </section>
+
+    <!-- What a caller can count on, said plainly. -->
+    <section class="promise" aria-labelledby="promise-title">
+      <h2 class="promise-title" id="promise-title" data-t="promise.title">Our promise to everyone who calls</h2>
+      <ul class="promise-list">
+        <li data-t="promise.1">It's free — from any country, always.</li>
+        <li data-t="promise.2">Look as long as you like.</li>
+        <li data-t="promise.3">Hang up whenever you want.</li>
+        <li data-t="promise.4">We call you only if you ask us to.</li>
+      </ul>
     </section>
 
     <!-- For the people who own and sell the towers. -->
@@ -188,7 +230,8 @@
         <div class="biz-text">
           <p class="eyebrow" data-t="biz.eyebrow">For developers &amp; brokerages</p>
           <h2 id="biz-title" data-t="biz.title">Put your tower on 800mcp.</h2>
-          <p data-t="biz.text">A sign on the building, live cameras in the show apartments, and an assistant that answers every passer-by — with each enquiry in your team's hands the moment it is made.</p>
+          <p class="biz-lead" data-t="biz.lead">Every evening, people stop outside your building and look up. Most of them walk on.</p>
+          <p data-t="biz.text">800mcp gives every one of them a way in: a sign on the building, live cameras in your show apartments, and an assistant that answers at once — with each enquiry in your team's hands the moment it is made.</p>
           <p class="biz-price" data-t="biz.price" data-testid="biz-price">Free for everyone who calls. For property owners, priced by quotation — tell us about your building and we will send you one.</p>
         </div>
         <div class="biz-side">
@@ -215,25 +258,31 @@
         <details><summary><span data-t="faq.2.q">Do I need to install anything?</span><i aria-hidden="true"></i></summary><p data-t="faq.2.a">No. It works in the browser of any modern phone: type the address on the sign — 800mcp.com — and the call opens.</p></details>
         <details><summary><span data-t="faq.3.q">Are the cameras really live?</span><i aria-hidden="true"></i></summary><p data-t="faq.3.a">Yes. What you see is the apartment as it is at that moment, room by room — not photographs.</p></details>
         <details><summary><span data-t="faq.4.q">Who answers the call?</span><i aria-hidden="true"></i></summary><p data-t="faq.4.a">Our assistant, straight away, in English or Arabic. Ask for a person at any time and one of our property consultants will call you.</p></details>
+        <details><summary><span data-t="faq.8.q">Will someone try to sell me something?</span><i aria-hidden="true"></i></summary><p data-t="faq.8.a">No. Look around as long as you like and hang up whenever you want. We call you only if you leave your number and ask us to.</p></details>
         <details><summary><span data-t="faq.5.q">What happens to my number?</span><i aria-hidden="true"></i></summary><p data-t="faq.5.a">We use your name and number only to arrange your viewing and to call you about the property. Nothing else.</p></details>
         <details><summary><span data-t="faq.6.q">Which towers can I see?</span><i aria-hidden="true"></i></summary><p data-t="faq.6.a">Any tower with an 800mcp sign — from in front of it, or from home, anywhere in the world. Start a live preview and tell the assistant which tower you mean.</p></details>
         <details><summary><span data-t="faq.7.q">Who pays for 800mcp?</span><i aria-hidden="true"></i></summary><p data-t="faq.7.a">Never the caller: it is toll-free from anywhere in the world. Property owners and developers pay to put their towers on 800mcp, by quotation — write to support@800mcp.com.</p></details>
       </div>
     </section>
 
-    <!-- The last word before the contact details: the call, once more. -->
+    <!-- The last word before the contact details: one tower's face, close, and
+         one window lit brighter than the rest — the call, once more. -->
     <section class="final" aria-labelledby="final-title">
-      <h2 id="final-title" data-t="final.title">At the tower, or across the world?</h2>
-      <p data-t="final.text">See the apartment inside — live — and book a viewing in a minute. Toll-free from any country.</p>
-      <a class="cta big js-call" href="/call" data-testid="final-cta">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <span data-t="hero.start">Start a live preview</span>
-      </a>
-      <ul class="perks">
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="perk.free">Toll-free, worldwide</span></li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="perk.noapp">No app</span></li>
-        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="perk.langs">English &amp; العربية</span></li>
-      </ul>
+      <canvas class="facade" id="facade" aria-hidden="true"></canvas>
+      <span class="yours" id="yours" aria-hidden="true" hidden></span>
+      <div class="final-in">
+        <h2 id="final-title" data-t="final.title">One of those windows could be yours.</h2>
+        <p data-t="final.text">See it from the inside, now — live, toll-free from any country, in a minute.</p>
+        <a class="cta big js-call" href="/call" data-testid="final-cta">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span data-t="hero.start">Start a live preview</span>
+        </a>
+        <ul class="perks">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="perk.free">Toll-free, worldwide</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="perk.noapp">No app</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-t="perk.langs">English &amp; العربية</span></li>
+        </ul>
+      </div>
     </section>
 
     <section class="contact" id="contact" aria-labelledby="contact-title">
