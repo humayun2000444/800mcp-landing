@@ -5,38 +5,12 @@
    at least 44px, nothing is wider than the screen, and the way into a call is
    always in reach — in the bar, in the hero, and once more before the end.
 
-   ONE EVENING, FROM THE OUTSIDE IN. The top is the city at dusk, its windows
-   lighting up (drawn by night.js, in the film's own colours) while the
-   headline's last line switches on like the sign; then four moments by the
-   clock; a departures board — Dubai is where the world changes planes — on
-   which every call costs nothing; what made looking for a home tiring, struck
-   through; a promise; and at the end one tower's face with one window lit
-   brighter than the rest. The lit window is the page's one mark: it stands in
-   for a bullet wherever the page lists something.
-
-   The brand's own night (shared/base.css): navy ground, one amber, white
-   type, Titillium for what the sign says and IBM Plex for the rest (Cairo and
-   Plex Arabic, in Arabic). Every side is "start" and "end", never left and
-   right, so the page turns round by itself in Arabic. Motion is gentle, and
-   none at all for anyone who asks for less. */
-
-:root {
-  /* the film's dusk */
-  --dusk: #382b5e;
-  --ember: #a25a4f;
-  /* a lit window, and the sign before it is switched on */
-  --window: #ffcf7a;
-  --window-hi: #ffe7b3;
-  --window-glow: rgba(255, 207, 122, 0.55);
-  --unlit: rgba(245, 176, 65, 0.28);
-  /* the departures board */
-  --board: #07090e;
-  --board-line: #141a26;
-  --tile: #222838;
-  --tile-lo: #1a1f2d;
-  /* how tall the drawn city is at the foot of the hero */
-  --city: 210px;
-}
+   The brand's own night (shared/base.css): navy ground, one amber, white type,
+   Titillium for what the sign says and IBM Plex for the rest (Cairo and Plex
+   Arabic, in Arabic). The one bold thing is the headline, lit like the sign;
+   the film moves beside it; everything under it is quiet. Every side is
+   "start" and "end", never left and right, so the page turns round by itself
+   in Arabic. Motion is gentle, and none at all for anyone who asks for less. */
 
 html {
   scroll-behavior: smooth;
@@ -44,7 +18,11 @@ html {
 }
 
 body {
-  background: var(--bg);
+  /* Dusk over the city, as in the film: violet high up, the sign's amber below it. */
+  background:
+    radial-gradient(900px 560px at 85% -10%, rgba(124, 92, 168, 0.30), rgba(124, 92, 168, 0) 70%) no-repeat,
+    radial-gradient(700px 480px at 0% -4%, rgba(245, 176, 65, 0.10), rgba(245, 176, 65, 0) 70%) no-repeat,
+    var(--bg);
   overflow-x: hidden;
 }
 
@@ -65,16 +43,6 @@ svg {
   flex: none;
 }
 
-/* Read aloud, not shown. */
-.sr {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-}
-
 .skip {
   position: absolute;
   inset-inline-start: 16px;
@@ -89,18 +57,6 @@ svg {
 
 .skip:focus {
   top: 12px;
-}
-
-/* The page's one mark: a lit window. */
-.pane,
-.now h3::before,
-.promise-list li::before {
-  flex: none;
-  width: 10px;
-  height: 13px;
-  border-radius: 2px;
-  background: linear-gradient(180deg, var(--window-hi), var(--window));
-  box-shadow: 0 0 12px var(--window-glow);
 }
 
 /* ── buttons ─────────────────────────────────────────────────────────── */
@@ -150,11 +106,7 @@ svg {
   min-height: 56px;
   padding: 0 28px;
   font-size: 17px;
-  box-shadow: 0 12px 34px rgba(245, 176, 65, 0.26);
-}
-
-.cta.big:hover {
-  box-shadow: 0 14px 40px rgba(245, 176, 65, 0.36);
+  box-shadow: 0 12px 34px rgba(245, 176, 65, 0.24);
 }
 
 .ghost,
@@ -167,7 +119,6 @@ svg {
   padding: 0 24px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(11, 14, 21, 0.4);
   color: var(--text);
   font-size: 16px;
   font-weight: 600;
@@ -276,36 +227,14 @@ svg {
   font-size: 14px;
 }
 
-/* ── the hero: dusk over the city ────────────────────────────────────── */
+/* ── the hero ────────────────────────────────────────────────────────── */
 
 .hero {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  /* The last light high up, before the drawn city takes over below. */
-  background:
-    radial-gradient(1000px 560px at 88% -12%, rgba(124, 92, 168, 0.24), rgba(124, 92, 168, 0) 70%) no-repeat,
-    var(--bg);
-}
-
-.skyline {
-  position: absolute;
-  inset-inline: 0;
-  bottom: 0;
-  z-index: -1;
-  display: block;
-  width: 100%;
-  height: var(--city);
-  pointer-events: none;
-}
-
-.hero-in {
   display: grid;
-  gap: 32px;
+  gap: 36px;
   max-width: 1160px;
   margin: 0 auto;
-  /* Room under the film for the city, its tallest towers rising behind it. */
-  padding: 26px 16px calc(var(--city) - 30px);
+  padding: 28px 16px 40px;
 }
 
 .status {
@@ -334,27 +263,9 @@ svg {
   background: var(--go);
 }
 
-.kicker {
-  display: flex;
-  align-items: baseline;
-  gap: 11px;
-  max-width: 30em;
-  color: #d9d2e6;
-  font-family: var(--display);
-  font-size: clamp(17px, 4.7vw, 21px);
-  font-weight: 400;
-  line-height: 1.35;
-  text-wrap: balance;
-}
-
-.kicker .pane {
-  position: relative;
-  top: 1px;
-}
-
 .hero h1 {
   margin-top: 12px;
-  font-size: clamp(40px, 11.6vw, 80px);
+  font-size: clamp(40px, 11.6vw, 82px);
   font-weight: 700;
   line-height: 1.02;
   letter-spacing: -0.01em;
@@ -367,7 +278,7 @@ svg {
 /* Lit, as the sign is at night. */
 .hero h1 .lit {
   color: var(--brand);
-  text-shadow: 0 0 34px rgba(245, 176, 65, 0.34);
+  text-shadow: 0 0 34px rgba(245, 176, 65, 0.32);
 }
 
 .hero .lede {
@@ -400,7 +311,7 @@ svg {
   padding: 6px 12px;
   border: 1px solid var(--line-soft);
   border-radius: 999px;
-  background: rgba(18, 23, 34, 0.66);
+  background: rgba(18, 23, 34, 0.6);
   color: var(--text);
   font-size: 13px;
   font-weight: 500;
@@ -417,7 +328,6 @@ svg {
 }
 
 .film {
-  align-self: center;
   margin: 0;
 }
 
@@ -428,8 +338,7 @@ svg {
   border: 1px solid var(--line);
   border-radius: 16px;
   background: #000;
-  /* A window lit from inside: the warmth spills a little round its frame. */
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.6), 0 0 0 6px rgba(255, 255, 255, 0.02), 0 0 120px rgba(245, 176, 65, 0.1);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55), 0 0 0 6px rgba(255, 255, 255, 0.02);
 }
 
 .film video {
@@ -478,22 +387,125 @@ svg {
   font-weight: 500;
 }
 
+/* ── toll-free, worldwide ─────────────────────────────────────────────── */
+
+.world {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 16px 56px;
+}
+
+.world-panel {
+  position: relative;
+  display: grid;
+  gap: 20px;
+  overflow: hidden;
+  padding: 26px 20px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(124, 92, 168, 0.24), rgba(18, 23, 34, 0.92) 58%);
+}
+
+/* A faint globe behind it all, at the end of the line. */
+.world-backdrop {
+  position: absolute;
+  inset-inline-end: -70px;
+  top: -60px;
+  width: 280px;
+  height: 280px;
+  fill: none;
+  stroke: rgba(245, 176, 65, 0.13);
+  stroke-width: 0.5;
+  pointer-events: none;
+}
+
+.world-badge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--brand-line);
+  border-radius: 16px;
+  background: var(--brand-soft);
+}
+
+.world-badge svg {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.world-text {
+  position: relative;
+}
+
+.world h2 {
+  margin-top: 10px;
+  font-size: clamp(26px, 7vw, 38px);
+  font-weight: 700;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.world-text > p:not(.eyebrow) {
+  max-width: 36em;
+  margin-top: 12px;
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.world-points {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.world-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--ink);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.world-points svg {
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 /* ── the sections ────────────────────────────────────────────────────── */
 
-.story,
-.world,
-.ways,
+.steps,
+.offer,
 .about,
-.promise,
 .biz,
 .faq,
+.final,
 .contact {
   max-width: 1160px;
   margin: 0 auto;
-  padding: 64px 16px;
+  padding: 60px 16px;
 }
 
-.ways,
+.steps,
+.offer,
 .about,
 .faq,
 .contact {
@@ -505,348 +517,122 @@ svg {
 }
 
 .section-head h2,
-.world h2,
 .contact h2,
 .biz h2,
 .final h2 {
   margin-top: 12px;
-  font-size: clamp(28px, 7.6vw, 46px);
+  font-size: clamp(27px, 7.4vw, 42px);
   font-weight: 700;
-  line-height: 1.14;
+  line-height: 1.15;
   text-wrap: balance;
 }
 
-/* ── how it works: four moments of one evening ───────────────────────── */
-
-/* On a phone, down the page along a line — a lit window at each moment. */
-.moments {
-  position: relative;
+/* How it works: on a phone, a row to swipe through — the next one peeking in. */
+.steps-list {
   display: grid;
-  gap: 40px;
-  max-width: 640px;
-  margin: 36px 0 0;
-  padding: 0;
+  grid-auto-columns: 80%;
+  grid-auto-flow: column;
+  gap: 14px;
+  margin: 30px -16px 0;
+  padding: 4px 16px 14px;
+  overflow-x: auto;
   list-style: none;
+  scroll-padding-inline: 16px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
-.moments::before {
-  content: "";
-  position: absolute;
-  top: 10px;
-  bottom: 12px;
-  inset-inline-start: 4px;
-  width: 2px;
-  border-radius: 1px;
-  background: linear-gradient(180deg, var(--brand-line), rgba(245, 176, 65, 0.06));
+.steps-list::-webkit-scrollbar {
+  display: none;
 }
 
-.moments li {
-  position: relative;
-  display: grid;
-  gap: 10px;
-  padding-inline-start: 32px;
-}
-
-.moments li::before {
-  content: "";
-  position: absolute;
-  top: 3px;
-  inset-inline-start: 0;
-  width: 10px;
-  height: 13px;
-  border-radius: 2px;
-  background: linear-gradient(180deg, var(--window-hi), var(--window));
-  box-shadow: 0 0 0 5px var(--bg), 0 0 16px var(--window-glow);
-}
-
-.moments .at {
-  color: var(--brand);
-  font-family: var(--display);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-variant-numeric: tabular-nums;
-}
-
-.still {
-  position: relative;
-  margin: 2px 0 4px;
+.steps-list li {
   overflow: hidden;
   border: 1px solid var(--line-soft);
-  border-radius: 14px;
-  background: var(--surface-2);
+  border-radius: 16px;
+  background: rgba(18, 23, 34, 0.72);
+  scroll-snap-align: start;
 }
 
-.still img {
+.steps-list img {
   display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+  background: var(--surface-2);
 }
 
-/* The moment the camera is live — marked as the camera marks it. */
-.live-badge {
-  position: absolute;
-  top: 10px;
-  inset-inline-start: 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 5px 10px 5px 9px;
-  border-radius: 7px;
-  background: rgba(11, 14, 21, 0.78);
-  color: var(--ink);
-  font: 700 11px/1 var(--display);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+.step-text {
+  padding: 16px 18px 20px;
 }
 
-.live-badge i {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--stop);
-  box-shadow: 0 0 8px rgba(240, 82, 93, 0.8);
-}
-
-.moments h3 {
-  font-size: 25px;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.moments p {
-  color: var(--muted);
-  font-size: 16px;
-  line-height: 1.65;
-}
-
-/* ── toll-free from anywhere: the departures board ───────────────────── */
-
-.world {
-  display: grid;
-  gap: 34px;
-}
-
-.world-text > p:not(.eyebrow) {
-  max-width: 36em;
-  margin-top: 14px;
-  color: var(--text);
-  font-size: 16px;
-  line-height: 1.7;
-}
-
-.world-text > p.world-free {
-  margin-top: 22px;
-  color: var(--brand);
-  font-family: var(--display);
-  font-size: clamp(21px, 5.6vw, 27px);
-  font-weight: 700;
-  line-height: 1.25;
-}
-
-.world-text > p.world-how {
-  margin-top: 8px;
-  color: var(--muted);
-  font-size: 15px;
-}
-
-.board {
-  align-self: start;
-  padding: 16px 12px 14px;
-  border: 1px solid #1c2232;
-  border-radius: 18px;
-  background: linear-gradient(180deg, #0a0d14, var(--board));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 30px 70px rgba(0, 0, 0, 0.45);
-}
-
-.board-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 0 4px 14px;
-  border-bottom: 1px solid var(--board-line);
-}
-
-.board-title {
-  color: var(--ink);
-  font-family: var(--display);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-.board-clock {
-  flex: none;
-  padding: 7px 10px;
-  border-radius: 6px;
-  background: var(--tile);
-  color: var(--brand);
-  font-family: var(--display);
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.1em;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.board-cols {
-  display: none;
-}
-
-.board-rows {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.board-rows li {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 12px;
-  padding: 11px 4px;
-  border-bottom: 1px solid var(--board-line);
-}
-
-.board-rows li:last-child {
-  border-bottom: 0;
-}
-
-/* Three flaps, each split across the middle as a board's are. */
-.code {
-  display: inline-flex;
-  gap: 2px;
-  direction: ltr;
-}
-
-.code b {
-  display: grid;
+.steps-list .n {
+  display: inline-grid;
   place-items: center;
-  width: 22px;
+  width: 30px;
   height: 30px;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  background: linear-gradient(180deg, var(--tile) 0 48%, #05070b 48% 54%, var(--tile-lo) 54% 100%);
-  color: var(--ink);
-  font-family: var(--display);
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.place {
-  display: grid;
-  gap: 2px;
-  min-width: 0;
-}
-
-.city {
-  color: var(--ink);
-  font-family: var(--display);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.km {
-  color: var(--muted);
-  font-size: 13px;
-  font-variant-numeric: tabular-nums;
-}
-
-.fare {
-  padding: 7px 10px;
   border: 1px solid var(--brand-line);
-  border-radius: 6px;
+  border-radius: 50%;
   background: var(--brand-soft);
   color: var(--brand);
   font-family: var(--display);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
 }
 
-/* Downstairs: the caller at the foot of the tower — the same price. */
-.board-rows li.here .city {
-  color: var(--window);
+.steps-list h3,
+.offer-grid h3 {
+  margin: 12px 0 6px;
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 600;
 }
 
-.board-note {
-  margin-top: 12px;
-  padding: 0 4px;
-  color: var(--faint);
-  font-size: 13px;
-}
-
-/* ── what we offer: the tiring parts, struck through ─────────────────── */
-
-.ways-table {
-  margin-top: 30px;
-}
-
-.ways-cols {
-  display: none;
-}
-
-.ways-list {
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--line-soft);
-  list-style: none;
-}
-
-.ways-list li {
-  display: grid;
-  gap: 8px;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--line-soft);
-}
-
-.was {
-  color: #808a9d;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.was s {
-  text-decoration-color: rgba(240, 82, 93, 0.75);
-  text-decoration-thickness: 1.5px;
-}
-
-.now h3 {
-  display: flex;
-  align-items: baseline;
-  gap: 11px;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.3;
-}
-
-.now h3::before {
-  content: "";
-  position: relative;
-  top: 1px;
-}
-
-.now p {
-  margin-top: 6px;
-  padding-inline-start: 21px;
+.steps-list p,
+.offer-grid p {
   color: var(--muted);
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.6;
 }
 
-/* ── who we are, and what a caller can count on ──────────────────────── */
+/* What we offer: on a phone, the icon beside its words, to keep the list short. */
+.offer-grid {
+  display: grid;
+  gap: 12px;
+  margin: 30px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.offer-grid li {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 4px 14px;
+  padding: 18px;
+  border: 1px solid var(--line-soft);
+  border-radius: 16px;
+  background: rgba(18, 23, 34, 0.72);
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.offer-grid svg {
+  width: 42px;
+  height: 42px;
+  padding: 9px;
+  border-radius: 12px;
+  background: var(--brand-soft);
+  fill: none;
+  stroke: var(--brand);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.offer-grid h3 {
+  margin-top: 2px;
+}
 
 .about-body {
   display: grid;
@@ -860,52 +646,11 @@ svg {
 
 .about-body .about-lead {
   color: var(--ink);
-  font-size: 20px;
+  font-size: 19px;
   line-height: 1.55;
 }
 
-.promise {
-  padding-top: 8px;
-}
-
-.promise-title {
-  color: var(--brand);
-  font-family: var(--display);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-}
-
-.promise-list {
-  display: grid;
-  gap: 16px;
-  margin: 22px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.promise-list li {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  color: var(--ink);
-  font-family: var(--display);
-  font-size: clamp(22px, 6.2vw, 32px);
-  font-weight: 600;
-  line-height: 1.25;
-  text-wrap: balance;
-}
-
-.promise-list li::before {
-  content: "";
-  position: relative;
-  top: -2px;
-}
-
-/* ── for the people who own the towers ───────────────────────────────── */
-
-/* The one panel lit with the brand's amber. */
+/* For the people who own the towers: the one panel lit with the brand's amber. */
 .biz-panel {
   display: grid;
   gap: 26px;
@@ -922,13 +667,6 @@ svg {
   color: var(--text);
   font-size: 16px;
   line-height: 1.7;
-}
-
-.biz-text > p.biz-lead {
-  color: var(--ink);
-  font-family: var(--display);
-  font-size: 20px;
-  line-height: 1.45;
 }
 
 /* What owners pay: said plainly, apart from what callers do not. */
@@ -975,8 +713,7 @@ svg {
   width: 100%;
 }
 
-/* ── questions: each one a line to open — the answer under it ────────── */
-
+/* Questions: each one a line to open — the answer under it. */
 .faq-list {
   max-width: 820px;
   margin-top: 26px;
@@ -1045,69 +782,22 @@ svg {
   line-height: 1.7;
 }
 
-/* ── the end: one tower's face, one window ───────────────────────────── */
-
+/* The call, once more, before the end. */
 .final {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  padding: 150px 16px 76px;
-  background: linear-gradient(180deg, #121829, #0c101b);
-  text-align: center;
-}
-
-.facade {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-/* A pool of night behind the words, so they stay easy to read — and the face
-   fading into the page above and below it. */
-.final::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(ellipse 62% 58% at 50% 64%, rgba(11, 14, 21, 0.94), rgba(11, 14, 21, 0.62) 62%, rgba(11, 14, 21, 0.18)),
-    linear-gradient(180deg, var(--bg), rgba(11, 14, 21, 0) 10%, rgba(11, 14, 21, 0) 82%, var(--bg));
-}
-
-/* The one window lit brighter than the rest: placed by night.js over the pane it left dark. */
-.yours {
-  position: absolute;
-  top: var(--y);
-  left: var(--x);
-  z-index: 0;
-  width: var(--w);
-  height: var(--h);
-  border-radius: 2px;
-  background: linear-gradient(180deg, #fff6df, var(--window) 70%, #f5b041);
-  box-shadow: 0 0 22px 6px rgba(255, 207, 122, 0.6), 0 0 90px 34px rgba(245, 176, 65, 0.24);
-}
-
-.final-in {
-  position: relative;
-  z-index: 1;
   display: grid;
   justify-items: center;
-  max-width: 760px;
-  margin: 0 auto;
+  padding-top: 64px;
+  padding-bottom: 64px;
+  text-align: center;
 }
 
 .final h2 {
   margin-top: 0;
-  font-size: clamp(30px, 8.4vw, 58px);
-  line-height: 1.1;
 }
 
-.final-in > p {
+.final > p {
   max-width: 30em;
-  margin-top: 14px;
+  margin-top: 12px;
   color: var(--text);
   font-size: 17px;
   line-height: 1.6;
@@ -1115,14 +805,12 @@ svg {
 
 .final .cta {
   width: 100%;
-  margin-top: 28px;
+  margin-top: 26px;
 }
 
 .final .perks {
   justify-content: center;
 }
-
-/* ── how to reach us ─────────────────────────────────────────────────── */
 
 .contact {
   display: grid;
@@ -1226,12 +914,6 @@ svg {
 /* ── motion: gentle, and only for those who have not asked for less ───── */
 
 @media (prefers-reduced-motion: no-preference) {
-  /* The headline's last line switches on as the sign does: a flicker, then lit.
-     Before it, it is the sign unlit — dim, but there to read. */
-  .hero h1 .lit {
-    animation: switch-on 1.6s linear 0.95s both;
-  }
-
   /* The phone in the big buttons rings now and then, as a call does. */
   .cta.big svg {
     animation: ring 4s ease-in-out infinite;
@@ -1247,38 +929,19 @@ svg {
     animation: ping 1.8s ease-out infinite;
   }
 
-  /* The window that could be yours: warm, and breathing. */
-  .yours {
-    animation: glow 4.2s ease-in-out infinite;
+  .offer-grid li:hover,
+  .steps-list li:hover {
+    border-color: var(--brand-line);
+    transform: translateY(-3px);
   }
 
-  /* The board turns its flaps, row after row, the first time it is seen. */
-  .board.flipping .code b,
-  .board.flipping .fare {
-    animation: flap 0.6s cubic-bezier(0.3, 0.7, 0.4, 1) both;
-    animation-delay: calc(var(--row, 0) * 120ms + var(--i, 3) * 55ms);
-  }
-
-  .still img {
-    transition: transform 0.6s ease;
-  }
-
-  .moments li:hover .still img {
-    transform: scale(1.03);
+  .steps-list li {
+    transition: border-color 0.2s ease, transform 0.2s ease;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-}
-
-@keyframes switch-on {
-  0%, 11% { color: var(--unlit); text-shadow: none; }
-  12%, 17% { color: var(--brand); text-shadow: 0 0 34px rgba(245, 176, 65, 0.34); }
-  18%, 29% { color: var(--unlit); text-shadow: none; }
-  30%, 33% { color: var(--brand); text-shadow: 0 0 34px rgba(245, 176, 65, 0.34); }
-  34%, 47% { color: var(--unlit); text-shadow: none; }
-  48%, 100% { color: var(--brand); text-shadow: 0 0 34px rgba(245, 176, 65, 0.34); }
 }
 
 @keyframes ring {
@@ -1295,17 +958,6 @@ svg {
   100% { transform: scale(3); opacity: 0; }
 }
 
-@keyframes glow {
-  0%, 100% { box-shadow: 0 0 22px 6px rgba(255, 207, 122, 0.55), 0 0 80px 30px rgba(245, 176, 65, 0.2); }
-  50% { box-shadow: 0 0 30px 9px rgba(255, 207, 122, 0.75), 0 0 120px 46px rgba(245, 176, 65, 0.32); }
-}
-
-@keyframes flap {
-  0% { transform: perspective(240px) rotateX(-88deg); opacity: 0.25; }
-  65% { transform: perspective(240px) rotateX(14deg); opacity: 1; }
-  100% { transform: none; opacity: 1; }
-}
-
 /* ── wider than a narrow phone ───────────────────────────────────────── */
 
 @media (min-width: 372px) {
@@ -1319,39 +971,43 @@ svg {
 
 @media (min-width: 560px) {
   .logo-word { display: inline; }
+}
+
+@media (min-width: 560px) {
   .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
   .final .cta { width: auto; }
   .biz .outline { width: auto; }
   .contact-list > div { grid-template-columns: minmax(130px, 38%) 1fr; align-items: center; gap: 12px; }
-  .board { padding: 20px 18px 16px; }
-  .code b { width: 25px; height: 34px; font-size: 17px; }
-  .city { font-size: 18px; }
 }
 
 /* ── tablets ─────────────────────────────────────────────────────────── */
 
 @media (min-width: 720px) {
-  :root { --city: 290px; }
   .bar-in { gap: 14px; padding-inline: 20px; }
-  .hero-in { padding: 48px 20px calc(var(--city) - 56px); }
+  .hero { padding: 48px 20px 52px; }
+  .world { padding: 0 20px 72px; }
+  .world-panel { padding: 36px; }
   .hero .lede { font-size: 18px; }
-  .story, .world, .ways, .about, .promise, .biz, .faq, .contact { padding: 92px 20px; }
-  .promise { padding-top: 8px; }
-  .final { padding: 170px 20px 96px; }
+  .steps, .offer, .about, .biz, .faq, .final, .contact { padding: 80px 20px; }
+  .steps-list {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 36px 0 0;
+    padding: 0;
+    overflow: visible;
+  }
+  .offer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .offer-grid li { display: block; padding: 24px; }
+  .offer-grid h3 { margin-top: 16px; }
   .biz-panel { padding: 40px; }
   .about-body { font-size: 17px; }
-  .about-body .about-lead { font-size: 22px; }
-  .promise-list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 40px; }
-  .moments li { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 24px; align-content: start; }
-  .moments .at, .moments h3, .moments p { grid-column: 2; }
-  .moments .still { grid-column: 1; grid-row: 1 / span 3; margin: 0; }
+  .about-body .about-lead { font-size: 21px; }
 }
 
 /* ── desktops ────────────────────────────────────────────────────────── */
 
 @media (min-width: 1024px) {
-  :root { --city: 380px; }
-
   .nav {
     display: flex;
     gap: 24px;
@@ -1386,115 +1042,15 @@ svg {
   }
 
   .lang { margin-inline-start: 0; }
-
-  .hero-in {
-    grid-template-columns: minmax(0, 1.04fr) minmax(0, 1fr);
-    align-items: center;
-    gap: 56px;
-    padding: 76px 20px calc(var(--city) - 40px);
-  }
-
-  .story, .world, .ways, .about, .biz, .faq, .contact { padding: 100px 20px; }
-  .story { padding-top: 64px; }
-
-  /* The four moments side by side, on one line of time. */
-  .moments {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 28px;
-    max-width: none;
-    margin-top: 48px;
-    padding-top: 40px;
-  }
-
-  .moments::before {
-    top: 5px;
-    bottom: auto;
-    inset-inline: 0;
-    width: auto;
-    height: 2px;
-    background: var(--brand-line);
-    opacity: 0.6;
-  }
-
-  .moments li {
-    grid-template-columns: none;
-    padding-inline-start: 0;
-  }
-
-  .moments .at, .moments h3, .moments p, .moments .still { grid-column: auto; grid-row: auto; }
-  .moments .still { margin: 2px 0 6px; }
-  .moments li::before { top: -40px; }
-  .moments h3 { font-size: 23px; }
-
-  .world {
-    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-    align-items: center;
-    gap: 64px;
-  }
-
-  .board { padding: 24px 22px 18px; }
-
-  .board-cols,
-  .board-rows li {
-    display: grid;
-    grid-template-columns: 86px minmax(0, 1fr) 104px 92px;
-    gap: 16px;
-  }
-
-  .board-cols {
-    padding: 14px 4px 6px;
-    color: var(--faint);
-    font-family: var(--display);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
-
-  .board-cols span:nth-child(3),
-  .km { text-align: end; }
-
-  .board-rows li { padding: 12px 4px; }
-  .place { display: contents; }
-  .km { font-size: 15px; }
-  .fare { justify-self: end; }
-
-  /* What we offer: the heading stays while the list goes by. */
-  .ways {
-    display: grid;
-    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
-    gap: 64px;
-    align-items: start;
-  }
-
-  .ways .section-head { position: sticky; top: 110px; }
-  .ways-table { margin-top: 6px; }
-
-  .ways-cols,
-  .ways-list li {
-    display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: 32px;
-  }
-
-  /* (Not in capitals: the name in it is written 800mcp, as on the sign.) */
-  .ways-cols {
-    padding-bottom: 12px;
-    color: var(--faint);
-    font-family: var(--display);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-  }
-
-  .ways-list li { align-items: baseline; padding: 26px 0; }
-  .was { font-size: 16px; }
-
+  .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr); align-items: center; gap: 56px; padding: 84px 20px 72px; }
+  .world { padding-bottom: 96px; }
+  .world-panel { grid-template-columns: auto minmax(0, 1.25fr) minmax(0, 0.85fr); align-items: center; gap: 36px; padding: 40px 44px; }
+  .world-backdrop { width: 380px; height: 380px; top: -110px; inset-inline-end: -90px; }
+  .steps-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .offer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .about { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 64px; align-items: start; }
   .about .about-body { margin-top: 34px; }
-  .promise { padding: 0 20px 100px; }
   .biz-panel { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 56px; align-items: center; padding: 52px 56px; }
-  .final { padding: 190px 20px 120px; }
   .contact { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; }
   .film-sound { inset-inline-start: 16px; bottom: 16px; }
 }
@@ -1503,46 +1059,24 @@ svg {
 
 html:lang(ar) .hero h1 {
   /* Arabic letters are wider: a little smaller, so each line of the sign stays one line. */
-  font-size: clamp(38px, 10.4vw, 68px);
+  font-size: clamp(38px, 10.4vw, 66px);
   line-height: 1.25;
   letter-spacing: 0;
 }
 
 html:lang(ar) .hero .lede,
 html:lang(ar) .about-body,
-html:lang(ar) .faq details p,
-html:lang(ar) .moments p,
-html:lang(ar) .now p {
+html:lang(ar) .faq details p {
   line-height: 1.85;
 }
 
-html:lang(ar) .kicker {
-  font-size: clamp(18px, 4.9vw, 22px);
-  line-height: 1.6;
-}
-
-html:lang(ar) .promise-list li,
-html:lang(ar) .section-head h2,
-html:lang(ar) .world h2,
-html:lang(ar) .final h2 {
-  line-height: 1.35;
-}
-
-/* Arabic is not written in capitals: the board's city names keep their own size. */
-html:lang(ar) .city,
-html:lang(ar) .fare,
-html:lang(ar) .board-title {
-  font-weight: 700;
+/* The light in the panel comes from the start of the line: the right, in Arabic. */
+html[dir="rtl"] .world-panel {
+  background: linear-gradient(225deg, rgba(124, 92, 168, 0.24), rgba(18, 23, 34, 0.92) 58%);
 }
 
 html[dir="rtl"] .biz-panel {
   background:
     radial-gradient(520px 260px at 0% 0%, rgba(245, 176, 65, 0.14), rgba(245, 176, 65, 0) 70%),
     linear-gradient(180deg, rgba(26, 33, 48, 0.9), rgba(18, 23, 34, 0.9));
-}
-
-html[dir="rtl"] .hero {
-  background:
-    radial-gradient(1000px 560px at 12% -12%, rgba(124, 92, 168, 0.24), rgba(124, 92, 168, 0) 70%) no-repeat,
-    var(--bg);
 }

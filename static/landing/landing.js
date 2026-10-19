@@ -5,18 +5,11 @@
 // phone — and the call page follows it. Every "Live preview" is the way into a
 // call with the assistant (/call), in the language this page is read in.
 //
-// The page tells one evening, from the outside in (night.js draws the city):
-// the skyline at the top with its windows lighting up (shared/night.js — the call
-// page stands on the same city), four moments by the
-// clock, a departures board on which every call is free — with Dubai's own time
-// on it — and one lit window at the end.
-//
 // The film: a short silent loop of it plays in the hero (300 KB), and the
 // whole film, with its sound, is one tap away. Not for anyone who asked for
 // less motion or less data — they get the film's poster and its own controls.
 
 import { chooseLanguage, fillIn, setLanguage, words } from "../shared/lang.js";
-import { facade, skyline } from "../shared/night.js";
 import { WORDS } from "./words.js";
 
 const $ = (selector) => document.querySelector(selector);
@@ -31,8 +24,6 @@ const setting = (name) => (document.querySelector(`meta[name="800mcp:${name}"]`)
 // Where "Live preview & booking" goes: the call page, wherever the call is.
 const CALL = setting("call") || "/call";
 const SERVICE = setting("service") || "";
-const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  || !!(navigator.connection && navigator.connection.saveData);
 
 let t = words(WORDS, chooseLanguage());
 let status = "";            // "ai" | "agent" | "" — who would answer a call just now
@@ -55,40 +46,19 @@ function draw() {
   site.lang = "en";
   site.textContent = "cameramcp.com";
   $("#credit").replaceChildren(before, site, after || "");
-  // How far each city on the board is — the number as it is written in both languages.
-  for (const cell of document.querySelectorAll("[data-km]")) {
-    cell.textContent = t("board.km", { n: Number(cell.dataset.km).toLocaleString("en-US") });
-  }
-  drawClock();
   drawStatus();
   drawFilm();
-  // The four moments are stills of the film — of the film in this language.
-  for (const img of document.querySelectorAll(".moments img")) {
+  // The four steps are stills of the film — of the film in this language.
+  for (const img of document.querySelectorAll(".steps-list img")) {
     const src = img.getAttribute("src").replace(/step-(\d)(-ar)?\.jpg$/, (_, n) => `step-${n}${t.lang === "ar" ? "-ar" : ""}.jpg`);
     if (src !== img.getAttribute("src")) img.setAttribute("src", src);
   }
-  // The city turns round with the page.
-  if (city) city.redo();
 }
 
 function drawStatus() {
   $("#status").hidden = !status;
   if (status) $("#status-text").textContent = t(`status.${status}`);
 }
-
-// The departures board says what time it is in Dubai — now, wherever it is read.
-function drawClock() {
-  const clock = $("#board-clock");
-  try {
-    const time = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Dubai", hour: "2-digit", minute: "2-digit", hourCycle: "h23" })
-      .format(new Date());
-    clock.textContent = t("board.clock", { time });
-    clock.hidden = false;
-  } catch (error) {
-    clock.hidden = true;     // a browser that does not know Dubai's time: no clock rather than a wrong one
-  }
-}
-setInterval(drawClock, 15000);
 
 $("#lang-btn").addEventListener("click", () => {
   t = words(WORDS, t.lang === "ar" ? "en" : "ar");
@@ -105,32 +75,12 @@ $("#lang-btn").addEventListener("click", () => {
   })
   .catch(() => {});
 
-// ── the city ──────────────────────────────────────────────────────────────
-
-let city = null;
-let tower = null;
-try {
-  city = skyline($("#skyline"), { calm, rtl: () => t.lang === "ar" });
-  tower = facade($("#facade"), $("#yours"), { calm });
-} catch (error) {
-  /* the page is whole without its city */
-}
-
-// The board turns its flaps once, the first time it is seen.
-if (!calm && "IntersectionObserver" in window) {
-  const board = $("#board");
-  const seen = new IntersectionObserver(([entry]) => {
-    if (!entry.isIntersecting) return;
-    board.classList.add("flipping");
-    seen.disconnect();
-  }, { threshold: 0.35 });
-  seen.observe(board);
-}
-
 // ── the film ──────────────────────────────────────────────────────────────
 
 const film = $("#film-video");
 const sound = $("#film-sound");
+const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  || !!(navigator.connection && navigator.connection.saveData);
 let mode = "film";          // "loop" while the silent loop plays in the hero
 let filmLang = "";          // the language of the film now in the player
 
@@ -220,9 +170,4 @@ if ("IntersectionObserver" in window) {
 
 draw();
 // Read by the automated test.
-window.__landing = {
-  get lang() { return t.lang; },
-  get film() { return mode; },
-  get status() { return status; },
-  get city() { return { skyline: city ? city.draws : 0, facade: tower ? tower.draws : 0 }; },
-};
+window.__landing = { get lang() { return t.lang; }, get film() { return mode; }, get status() { return status; } };
