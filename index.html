@@ -10,20 +10,22 @@
        answering just now ("" = the site this page is on; "none" = do not ask).
        Served by the web-call service: its own /call. Exported for another host
        (webcall/dev/export_landing.py): wherever the call is. -->
-  <meta name="800mcp:call" content="#contact">
-  <meta name="800mcp:service" content="none">
+  <meta name="site:call" content="#contact">
+  <meta name="site:service" content="none">
   <title>800mcp.com — Call the tower. See it live.</title>
   <meta name="description" content="See the apartments inside our Dubai towers on live cameras and book a viewing in a minute — toll-free from anywhere in the world, no app, in English and Arabic.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="800mcp.com — Call the tower. See it live.">
   <meta property="og:description" content="Live camera tours of Dubai apartments — toll-free from anywhere in the world — and a viewing booked in a minute.">
-  <meta property="og:image" content="https://humayun2000444.github.io/800mcp-landing/static/landing/media/800mcp-film-poster.jpg">
-  <link rel="icon" type="image/svg+xml" href="static/shared/brand/800mcp-mark.svg">
-  <link rel="icon" type="image/png" href="static/shared/brand/800mcp-favicon.png">
-  <link rel="apple-touch-icon" href="static/shared/brand/800mcp-appicon-192.png">
+  <meta property="og:image" content="https://humayun2000444.github.io/800mcp-landing/brand/media/poster.jpg">
+  <link rel="icon" type="image/svg+xml" href="brand/mark.svg">
+  <link rel="icon" type="image/png" href="brand/favicon.png">
+  <link rel="apple-touch-icon" href="brand/appicon-192.png">
   <link rel="preload" href="static/shared/fonts/titillium-web-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="static/shared/base.css">
   <link rel="stylesheet" href="static/landing/landing.css">
+<style id="brand-theme">:root{--brand:#f5b041;--brand-hi:#ffc866;--brand-lo:#d8952b;--brand-soft:rgba(245, 176, 65, 0.14);--brand-line:rgba(245, 176, 65, 0.45);--on-brand:#0b0e15;--note-bg:rgba(245, 176, 65, 0.13);--note-ink:#ffd58a}</style>
+  <script type="application/json" id="brand-data">{"name": "800mcp", "name_ar": "800mcp", "tagline": "Call the tower. See it live.", "tagline_ar": "اتصل بالبرج. شاهده مباشرةً.", "call_site": "800mcp.com", "camera_site": "cameramcp.com", "email": "support@800mcp.com", "phone": "+97140000800", "phone_shown": "+971 4 000 0800", "id": "800mcp", "base": "brand/", "film": true, "words": {}}</script>
 </head>
 <body>
   <a class="skip" href="#main" data-t="skip">Skip to content</a>
@@ -32,7 +34,7 @@
   <header class="bar" id="top">
     <div class="bar-in">
       <a class="logo" href="./" aria-label="800mcp.com" lang="en">
-        <img src="static/shared/brand/800mcp-mark.svg" alt="" width="30" height="30">
+        <img src="brand/mark.svg" alt="" width="30" height="30">
         <span class="logo-word"><b>800</b>mcp.com</span>
       </a>
       <nav class="nav" aria-label="Sections" data-t-label="nav.label">
@@ -81,9 +83,9 @@
       <figure class="film" id="film">
         <div class="film-frame">
           <video id="film-video" controls playsinline preload="metadata"
-                 poster="static/landing/media/800mcp-film-poster.jpg"
+                 poster="brand/media/poster.jpg"
                  aria-label="The 800mcp film: from the street, to the sign, to the apartment — live." data-t-label="film.label">
-            <source src="static/landing/media/800mcp-film.mp4" type="video/mp4">
+            <source src="brand/media/film.mp4" type="video/mp4">
           </video>
           <button class="film-sound" id="film-sound" type="button" hidden>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
@@ -119,19 +121,19 @@
       </div>
       <ol class="steps-list">
         <li>
-          <img src="static/landing/media/step-1.jpg" width="848" height="478" loading="lazy" decoding="async" alt="The 800mcp.com sign, lit, on top of a tower at dusk." data-t-alt="steps.1.alt">
+          <img src="brand/media/step-1.jpg" width="848" height="478" loading="lazy" decoding="async" alt="The 800mcp.com sign, lit, on top of a tower at dusk." data-t-alt="steps.1.alt">
           <div class="step-text"><span class="n">1</span><h3 data-t="steps.1.title">Find the sign</h3><p data-t="steps.1.text">At any of our towers: 800mcp.com — type it into your phone's browser.</p></div>
         </li>
         <li>
-          <img src="static/landing/media/step-2.jpg" width="848" height="478" loading="lazy" decoding="async" alt="The call on a phone: the assistant asks which tower you are looking at." data-t-alt="steps.2.alt">
+          <img src="brand/media/step-2.jpg" width="848" height="478" loading="lazy" decoding="async" alt="The call on a phone: the assistant asks which tower you are looking at." data-t-alt="steps.2.alt">
           <div class="step-text"><span class="n">2</span><h3 data-t="steps.2.title">Accept the call</h3><p data-t="steps.2.text">Our assistant answers straight away. Nothing rings, nobody waits.</p></div>
         </li>
         <li>
-          <img src="static/landing/media/step-3.jpg" width="848" height="478" loading="lazy" decoding="async" alt="A live camera inside the apartment: the view from the forty-second floor." data-t-alt="steps.3.alt">
+          <img src="brand/media/step-3.jpg" width="848" height="478" loading="lazy" decoding="async" alt="A live camera inside the apartment: the view from the forty-second floor." data-t-alt="steps.3.alt">
           <div class="step-text"><span class="n">3</span><h3 data-t="steps.3.title">See inside, live</h3><p data-t="steps.3.text">Room by room on live cameras, described as you go.</p></div>
         </li>
         <li>
-          <img src="static/landing/media/step-4.jpg" width="848" height="478" loading="lazy" decoding="async" alt="The assistant asks whether to book your viewing." data-t-alt="steps.4.alt">
+          <img src="brand/media/step-4.jpg" width="848" height="478" loading="lazy" decoding="async" alt="The assistant asks whether to book your viewing." data-t-alt="steps.4.alt">
           <div class="step-text"><span class="n">4</span><h3 data-t="steps.4.title">Book a viewing</h3><p data-t="steps.4.text">Leave your name and a time; a consultant calls you back.</p></div>
         </li>
       </ol>

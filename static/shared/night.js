@@ -25,7 +25,14 @@ const SKY = [                  // the film's own sky, top to horizon
 const GROUND = "#0b0e15";      // the page itself (--bg): where the city ends
 const WARM = [255, 207, 122];  // a lit window
 const COOL = [201, 211, 255];  // a television, a screen
-const SIGN = "800mcp.com";
+// The sign on the tower: this page's brand's address (filled in by the service).
+const SIGN = (() => {
+  try {
+    return JSON.parse(document.getElementById("brand-data").textContent).call_site || "";
+  } catch (error) {
+    return "";
+  }
+})();
 
 /** The same "random" every time, from a number. */
 function seeded(seed) {

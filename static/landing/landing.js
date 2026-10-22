@@ -9,18 +9,21 @@
 // whole film, with its sound, is one tap away. Not for anyone who asked for
 // less motion or less data — they get the film's poster and its own controls.
 
-import { chooseLanguage, fillIn, setLanguage, words } from "../shared/lang.js";
+import { BRAND, chooseLanguage, fillIn, setLanguage, words } from "../shared/lang.js";
 import { WORDS } from "./words.js";
 
 const $ = (selector) => document.querySelector(selector);
 // (Relative: the same files work from the service and from any static host.)
 // The film is made in each language: the Arabic page shows the Arabic one.
-const MEDIA = "static/landing/media/";
+const MEDIA = `${BRAND.base || "brand/"}media/`;
+// A brand with no film of its own has none on its page (nor the film's stills).
+const HAS_FILM = !!BRAND.film;
+if (!HAS_FILM) document.documentElement.classList.add("no-film");
 const filmOf = (lang) => {
   const ar = lang === "ar" ? "-ar" : "";
-  return { loop: `${MEDIA}800mcp-loop${ar}.mp4`, film: `${MEDIA}800mcp-film${ar}.mp4`, poster: `${MEDIA}800mcp-film-poster${ar}.jpg` };
+  return { loop: `${MEDIA}loop${ar}.mp4`, film: `${MEDIA}film${ar}.mp4`, poster: `${MEDIA}poster${ar}.jpg` };
 };
-const setting = (name) => (document.querySelector(`meta[name="800mcp:${name}"]`) || {}).content;
+const setting = (name) => (document.querySelector(`meta[name="site:${name}"]`) || {}).content;
 // Where "Live preview & booking" goes: the call page, wherever the call is.
 const CALL = setting("call") || "/call";
 const SERVICE = setting("service") || "";
@@ -39,12 +42,13 @@ function draw() {
   for (const link of document.querySelectorAll(".js-call")) {
     link.href = CALL.startsWith("#") ? CALL : `${CALL}${CALL.includes("?") ? "&" : "?"}lang=${t.lang}`;
   }
-  $("#biz-mail").href = `mailto:support@800mcp.com?subject=${encodeURIComponent(t("biz.subject"))}`;
+  $("#biz-mail").href = `mailto:${BRAND.email || ""}?subject=${encodeURIComponent(t("biz.subject"))}`;
   $("#rights").textContent = t("footer.rights", { year: new Date().getFullYear() });
   const [before, after] = t("footer.credit").split("{site}");
   const site = document.createElement("b");
   site.lang = "en";
-  site.textContent = "cameramcp.com";
+  site.textContent = BRAND.camera_site || "";
+  $("#credit").hidden = !BRAND.camera_site;
   $("#credit").replaceChildren(before, site, after || "");
   drawStatus();
   drawFilm();
@@ -86,7 +90,7 @@ let filmLang = "";          // the language of the film now in the player
 
 // The film in this page's language — swapped where it stands (loop or whole film).
 function drawFilm() {
-  if (filmLang === t.lang) return;
+  if (!HAS_FILM || filmLang === t.lang) return;
   const first = !filmLang;
   filmLang = t.lang;
   const media = filmOf(t.lang);
@@ -114,7 +118,7 @@ function wholeFilm(play) {
   }
 }
 
-if (!calm) {
+if (!calm && HAS_FILM) {
   mode = "loop";
   film.controls = false;
   film.muted = true;

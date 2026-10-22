@@ -1080,3 +1080,6 @@ html[dir="rtl"] .biz-panel {
     radial-gradient(520px 260px at 0% 0%, rgba(245, 176, 65, 0.14), rgba(245, 176, 65, 0) 70%),
     linear-gradient(180deg, rgba(26, 33, 48, 0.9), rgba(18, 23, 34, 0.9));
 }
+
+/* A brand with no film: no film, no "watch the film", no stills of it. */
+.no-film #film, .no-film #watch, .no-film .steps img { display: none; }

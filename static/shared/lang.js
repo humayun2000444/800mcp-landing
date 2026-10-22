@@ -48,11 +48,33 @@ export function setLanguage(lang, { remember = false } = {}) {
  * language does not have is shown in English — never a blank, never a key.
  * `{name}` in a sentence is filled from `values`.
  */
+// The brand this page wears — filled in by the service as the page is served
+// (server/brands.py) — and how its words name it: {brand} {brand_site}
+// {camera_site} {brand_email} {brand_phone}. A brand may also write any
+// sentence its own way ("words" in its brand.json).
+export const BRAND = (() => {
+  try {
+    return JSON.parse(document.getElementById("brand-data").textContent) || {};
+  } catch (error) {
+    return {};
+  }
+})();
+
+function brandValues(lang) {
+  const pick = (key) => (lang === "ar" && BRAND[`${key}_ar`]) || BRAND[key] || "";
+  return { brand: pick("name"), brand_site: BRAND.call_site || "", camera_site: BRAND.camera_site || "",
+           brand_email: BRAND.email || "", brand_phone: BRAND.phone_shown || BRAND.phone || "" };
+}
+
 export function words(tables, lang) {
-  const own = tables[lang] || {};
+  const theirs = (BRAND.words && typeof BRAND.words === "object") ? BRAND.words : {};
+  const own = { ...(tables[lang] || {}), ...(theirs[lang] || {}) };
+  const english = { ...(tables.en || {}), ...(theirs.en || {}) };
+  const named = brandValues(lang);
   const t = (key, values) => {
-    let text = key in own ? own[key] : key in tables.en ? tables.en[key] : key;
-    if (values) text = text.replace(/\{(\w+)\}/g, (all, name) => (name in values ? String(values[name]) : all));
+    let text = key in own ? own[key] : key in english ? english[key] : key;
+    const all = values ? { ...named, ...values } : named;
+    text = String(text).replace(/\{(\w+)\}/g, (whole, name) => (name in all && all[name] !== "" ? String(all[name]) : whole));
     return text;
   };
   t.lang = lang;
