@@ -8,12 +8,21 @@
 // Each page keeps its own sentences, in both languages, in its own words.js.
 // This is only what they share: choosing, turning the page, filling it in.
 
-export const LANGUAGES = ["en", "ar"];
+// The languages this page offers: the service says, in the
+// <meta name="site:languages"> it puts on the call's pages — English alone on
+// a server without Arabic's engines (WEBCALL_LANGUAGES=en). Not said (the
+// landing page, always): both.
+export const LANGUAGES = (() => {
+  const said = (document.querySelector('meta[name="site:languages"]') || {}).content || "";
+  const offered = said.split(",").map((lang) => lang.trim()).filter((lang) => lang === "en" || lang === "ar");
+  return offered.length ? offered : ["en", "ar"];
+})();
 const KEPT = "webcall.lang";
 
 /** The language to open in: the link's, else this phone's last choice
-    (`remembered`), else the phone's own. */
+    (`remembered`), else the phone's own — of the ones the site offers. */
 export function chooseLanguage({ remembered = true } = {}) {
+  if (LANGUAGES.length === 1) return LANGUAGES[0];
   const asked = new URLSearchParams(location.search).get("lang");
   if (LANGUAGES.includes(asked)) return asked;
   if (remembered) {
@@ -34,6 +43,8 @@ export function setLanguage(lang, { remember = false } = {}) {
   const root = document.documentElement;
   root.lang = lang;
   root.dir = lang === "ar" ? "rtl" : "ltr";
+  // A site in one language has nothing to switch to.
+  if (LANGUAGES.length < 2) for (const button of document.querySelectorAll("#lang-btn")) button.style.display = "none";
   if (remember) {
     try {
       localStorage.setItem(KEPT, lang);
